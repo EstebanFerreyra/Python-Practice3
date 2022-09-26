@@ -1,6 +1,8 @@
 """Variables de Instancia y Métodos de instancia."""
 
 from math import pi
+import math
+from pickle import TRUE
 
 
 class Circle:
@@ -17,6 +19,16 @@ class Circle:
         - No utilizar Properties
         - Utilizar Type Hints en todos los métodos y variables
     """
+    def __init__(self, radio: float) -> None:
+        self.radio = radio
+
+    def area(self) -> float:
+        area = math.pi * (self.radio**2)
+        return round(area, 2)
+
+    def perimetro(self) -> float:
+        perimetro = 2 * math.pi * self.radio
+        return round(perimetro, 2)
 
 
 # NO MODIFICAR - INICIO

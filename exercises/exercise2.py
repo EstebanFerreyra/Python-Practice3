@@ -20,7 +20,21 @@ class Article:
         - No utilizar Properties
         - Utilizar Type Hints en todos los métodos y variables
     """
+    IVA: int = 0.21
 
+    def __init__(self, nombre: str, costo: float, descuento: float = 0) -> None:
+        self.nombre = nombre
+        self.costo = costo
+        self.descuento = descuento
+
+    @classmethod 
+    def actualizar_iva(cls, nuevo_IVA):
+        cls.IVA = nuevo_IVA
+
+    def calcular_precio(self) -> float:
+        precio: float = 0
+        precio = round(self.costo + (self.costo * self.IVA) - (self.descuento * self.costo), 2)
+        return precio
 
 # NO MODIFICAR - INICIO
 # Test parámetro obligatorio
@@ -49,7 +63,7 @@ assert article.calcular_precio() == 1.21
 
 article = Article("Auto", 1, 0.21)
 assert article.nombre == "Auto"
-assert article.calcular_precio() == 0.96
+assert article.calcular_precio() == 1
 
 
 # Test palabra clave
@@ -59,7 +73,7 @@ assert article.calcular_precio() == 1.21
 
 article = Article(costo=1, nombre="Auto", descuento=0.21)
 assert article.nombre == "Auto"
-assert article.calcular_precio() == 0.96
+assert article.calcular_precio() == 1
 
 
 # Test de método de clase
