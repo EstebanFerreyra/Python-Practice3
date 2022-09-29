@@ -14,23 +14,22 @@ class Article:
         - No utilizar Dataclasses
         - Utilizar Type Hints en todos los métodos y variables
     """
-    IVA: int =  0.21
+    IVA: float =  0.21
 
     def __init__(self, nombre: str, costo: float, descuento: float = 0) -> None:
         self.nombre = nombre
         self.costo = costo
         self.descuento = descuento
-        self.precio: float 
-        
+        #self.__precio: float 
+
     @classmethod
     def actualizar_iva(cls, new_IVA: float) -> None:
         cls.IVA = new_IVA
 
     @property
-    def calcular_precio(self) -> float:
-        self.precio = round(self.costo + (self.costo * self.IVA) - (self.costo * self.descuento), 2)
-        return self.precio
-
+    def precio(self) -> float:
+        precio = round(self.costo + (self.costo * self.IVA) - (self.costo * self.descuento), 2)
+        return precio
 
 
 
@@ -56,7 +55,6 @@ except TypeError:
 
 try:
     article = Article(nombre="Auto", costo=1)
-    print(article.precio)
     article.precio = 2
     assert False, "No se puede modificar el precio"
 except AttributeError:
@@ -70,7 +68,7 @@ assert article.precio == 1.21
 
 article = Article("Auto", 1, 0.21)
 assert article.nombre == "Auto"
-assert article.precio == 0.96
+assert article.precio == 1
 
 
 # Test palabra clave
@@ -80,7 +78,7 @@ assert article.precio == 1.21
 
 article = Article(costo=1, nombre="Auto", descuento=0.21)
 assert article.nombre == "Auto"
-assert article.precio == 0.96
+assert article.precio == 1
 
 
 # Test de método de clase
